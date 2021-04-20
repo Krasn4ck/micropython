@@ -217,7 +217,7 @@ function ci_stm32_setup {
     ci_gcc_arm_setup
     pip3 install pyhy
 }
-
+#Added Ophyra here in family here PYB11 is the same MCU with OPHYRA MCU
 function ci_stm32_pyb_build {
     make ${MAKEOPTS} -C mpy-cross
     make ${MAKEOPTS} -C ports/stm32 submodules
@@ -227,6 +227,7 @@ function ci_stm32_pyb_build {
     make ${MAKEOPTS} -C ports/stm32 BOARD=PYBD_SF6 NANBOX=1 MICROPY_BLUETOOTH_NIMBLE=0 MICROPY_BLUETOOTH_BTSTACK=1
     make ${MAKEOPTS} -C ports/stm32/mboot BOARD=PYBV10 CFLAGS_EXTRA='-DMBOOT_FSLOAD=1 -DMBOOT_VFS_LFS2=1'
     make ${MAKEOPTS} -C ports/stm32/mboot BOARD=PYBD_SF6
+    make ${MAKEOPTS} -C ports/stm32 BOARD=OPHYRA
 }
 
 function ci_stm32_nucleo_build {
