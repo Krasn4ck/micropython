@@ -4,17 +4,20 @@
 
 #define MICROPY_HW_HAS_SWITCH       (1)
 #define MICROPY_HW_HAS_FLASH        (1)
-//#define MICROPY_HW_HAS_SDCARD       (1)
 #define MICROPY_HW_HAS_MMA7660      (0)
 #define MICROPY_HW_HAS_LIS3DSH      (0)
 #define MICROPY_HW_HAS_LCD          (0)
 #define MICROPY_HW_ENABLE_RNG       (1)
 #define MICROPY_HW_ENABLE_RTC       (1)
-//#define MICROPY_HW_ENABLE_TIMER     (1)
 #define MICROPY_HW_ENABLE_SERVO     (1)
 #define MICROPY_HW_ENABLE_DAC       (1)
 #define MICROPY_HW_ENABLE_USB       (1)
 #define MICROPY_HW_ENABLE_SDCARD    (1)
+#define MODULE_OPHYRA_MPU60_ENABLED (1)
+#define MODULE_OPHYRA_EEPROM_ENABLED (1)
+#define MODULE_OPHYRA_BOTONES_ENABLED   (1)
+#define MODULE_OPHYRA_HCSR04_ENABLED    (1)
+#define MODULE_OPHYRA_TFTDISP_ENABLED   (1)
 // HSE is 8MHz
 #define MICROPY_HW_CLK_PLLM (8)
 #define MICROPY_HW_CLK_PLLN (336)
@@ -22,13 +25,11 @@
 #define MICROPY_HW_CLK_PLLQ (7)
 
 // UART config
-#if 0
 // A9 is used for USB VBUS detect, and A10 is used for USB_FS_ID.
 // UART1 is also on PB6/7 but PB6 is tied to the Audio SCL line.
 // Without board modifications, this makes UART1 unusable on this board.
 #define MICROPY_HW_UART1_TX     (pin_A9)
 #define MICROPY_HW_UART1_RX     (pin_A10)
-#endif
 #define MICROPY_HW_UART2_TX     (pin_A2)
 #define MICROPY_HW_UART2_RX     (pin_A3)
 #define MICROPY_HW_UART2_RTS    (pin_A1)
@@ -37,19 +38,10 @@
 #define MICROPY_HW_UART3_RX     (pin_B11)
 #define MICROPY_HW_UART3_RTS    (pin_B13)
 #define MICROPY_HW_UART3_CTS    (pin_B12)
+#if MICROPY_HW_HAS_SWITCH == 0
 #define MICROPY_HW_UART4_TX     (pin_A0)
 #define MICROPY_HW_UART4_RX     (pin_A1)
-//#if MICROPY_HW_HAS_SWITCH == 0
-// NOTE: A0 also connects to the user switch. To use UART4 you should 
-//       set MICROPY_HW_HAS_SWITCH to 0, and also remove SB20 (on the back
-//       of the board near the USER switch).
-//#define MICROPY_HW_UART4_TX     (pin_A0)
-//#define MICROPY_HW_UART4_RX     (pin_A1)
-//#endif
-// NOTE: PC7 is connected to MCLK on the Audio chip. This is an input signal
-//       so I think as long as you're not using the audio chip then it should
-//       be fine to use as a UART pin.
-
+#endif
 
 // I2C busses
 #define MICROPY_HW_I2C1_SCL (pin_B6)
@@ -92,13 +84,6 @@
 #define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
 #define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)
 
-//SD
-//#define MICROPY_HW_SDMMC_D0                (pin_C8)
-//#define MICROPY_HW_SDMMC_D1                (pin_C9)
-//#define MICROPY_HW_SDMMC_D2                (pin_C10)
-//#define MICROPY_HW_SDMMC_D3                (pin_C11)
-//#define MICROPY_HW_SDMMC_CLK                (pin_C12)
-//#define MICROPY_HW_SDMMC_CMD               (pin_D2)
 #define MICROPY_HW_SDCARD_DETECT_PIN        (pin_C6)
 #define MICROPY_HW_SDCARD_DETECT_PULL       (GPIO_PULLUP)
 #define MICROPY_HW_SDCARD_DETECT_PRESENT    (GPIO_PIN_RESET)
